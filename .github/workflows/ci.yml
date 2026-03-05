@@ -347,6 +347,7 @@ jobs:
   # ────────────────────────────────────────────────────────────────
   # SECURITY — Trivy filesystem (dépendances, secrets, IaC)
   # ────────────────────────────────────────────────────────────────
+
   trivy-fs:
     name: "Security — Trivy Filesystem"
     runs-on: ubuntu-24.04
@@ -366,7 +367,10 @@ jobs:
           exit-code: "0"
           trivyignores: .trivyignore
           vex: vex.json
-
+      - name: Créer fichier SARIF vide si absent
+        if: always() && hashFiles('trivy-fs.sarif') == ''
+        run: |
+          echo '{"version":"2.1.0","runs":[]}' > trivy-fs.sarif
       - name: Upload SARIF (filesystem)
         if: always()
         uses: github/codeql-action/upload-sarif@v4
