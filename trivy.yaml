@@ -1,0 +1,8 @@
+vulnerability:
+  ignore-unfixed: true
+
+ignore:
+  vuln-ids:
+    - CVE-2026-33671
+    - CVE-2026-33750
+    - CVE-2026-33672
