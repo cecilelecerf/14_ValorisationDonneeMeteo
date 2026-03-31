@@ -1,4 +1,5 @@
 FROM python:3.12-slim-bookworm
+COPY --from=ghcr.io/astral-sh/uv:0.10.0 /uv /uvx /bin/
 
 WORKDIR /app
 
@@ -6,12 +7,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     UV_NO_DEV=1
 
-COPY --from=ghcr.io/astral-sh/uv:0.10.0 /uv /uvx /bin/
+COPY pyproject.toml uv.lock ./
+RUN uv sync --locked --no-dev --no-install-project
+
 
 COPY . .
-RUN uv sync --locked
-
-
+RUN uv sync --locked --no-dev
 
 COPY entrypoint.sh /entrypoint.sh
 
