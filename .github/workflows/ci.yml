@@ -123,8 +123,6 @@ jobs:
           severity: CRITICAL,HIGH
           exit-code: "1"
           ignore-unfixed: true
-          trivyignores: .trivyignore
-          vex: vex.json
 
       - name: Trivy — scan image (rapport table)
         if: always()
@@ -135,8 +133,6 @@ jobs:
           output: trivy-frontend-image.txt
           severity: CRITICAL,HIGH
           ignore-unfixed: true
-          trivyignores: .trivyignore
-          vex: vex.json
 
       - name: Debug — vérifier le SARIF
         if: always()
