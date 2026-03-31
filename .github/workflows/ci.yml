@@ -138,6 +138,14 @@ jobs:
           trivyignores: .trivyignore
           vex: vex.json
 
+      - name: Debug — vérifier le SARIF
+        if: always()
+        run: |
+          echo "=== Existence et taille ==="
+          ls -lh trivy-frontend-image.sarif || echo "fichier absent"
+          echo "=== Contenu ==="
+          cat trivy-frontend-image.sarif
+
       - name: Upload SARIF (frontend image)
         if: always()
         uses: github/codeql-action/upload-sarif@v4
@@ -255,7 +263,7 @@ jobs:
       - name: Run tests
         env:
           DEBUG: "true"
-          USE_TIMESCALEDB: "false"
+          USE_TIMESCALEDB: "true"
           DB_HOST: localhost
           DB_PORT: "5432"
           DB_NAME: test_db
