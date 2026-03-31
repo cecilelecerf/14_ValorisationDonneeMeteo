@@ -6,3 +6,6 @@ ignore:
     - CVE-2026-33671
     - CVE-2026-33750
     - CVE-2026-33672
+
+skip-files:
+  - "root/.npm/_cacache"
