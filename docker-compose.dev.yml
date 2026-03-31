@@ -51,6 +51,22 @@ services:
     networks:
       - app_net
 
+  prometheus:
+    image: prom/prometheus:main
+    networks:
+      - app_net
+      - bd_net
+    ports:
+      - 9090:9090
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+
+      # add image docker image prometus, archi de type pull
+      # donnée url front et back, il va chercher un / metric
+      # Il faut qu'on l'expose dans le front et le back en activant la création de metrics
+      # Via packages / dépendances
+      # en prod metrics ne doit pas être exposer en public (pas utile dans notre cas)
+
 volumes:
   timescaledb-data:
     driver: local
