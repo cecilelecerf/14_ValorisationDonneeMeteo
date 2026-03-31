@@ -4,14 +4,15 @@ WORKDIR /app
 
 COPY package*.json .
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 
 RUN npm run build
 
 FROM node:24-alpine AS prod
-
+RUN apk upgrade --no-cache && \
+    npm install -g npm@latest
 WORKDIR /app
 
 COPY --from=build /app/.output /app/.output
