@@ -325,7 +325,7 @@ jobs:
         if: always()
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:ci
+          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:ci
           format: sarif
           output: trivy-backend-image.sarif
           severity: CRITICAL,HIGH
