@@ -31,13 +31,7 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: Cache node_modules
-        uses: actions/cache/save@v4
-        with:
-          path: frontend/node_modules
-          key: frontend-node-${{ hashFiles('frontend/package-lock.json') }}
+        run: npm ci --legacy-peer-deps
 
   frontend-lint:
     name: "Frontend — Lint & Type check"
@@ -53,12 +47,10 @@ jobs:
         with:
           node-version: 20
 
-      - uses: actions/cache/restore@v4
-        with:
-          path: frontend/node_modules
-          key: frontend-node-${{ hashFiles('frontend/package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
 
-      - name: Lint + type check (npm run check)
+      - name: Lint + type check
         run: npm run check
 
   frontend-test:
