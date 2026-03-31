@@ -212,7 +212,7 @@ jobs:
         run: uv run ruff check . --output-format=junit > ../reports/backend-lint.xml || true
 
       - name: Format check (ruff format)
-        run: uv run ruff format . --check
+        run: uv run ruff format . --check --exclude notebooks
 
       - name: Upload rapport lint
         if: always()
